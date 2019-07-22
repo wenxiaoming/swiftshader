@@ -362,6 +362,10 @@ namespace sw
 		uint32_t size;
 	};
 
+#ifdef Yield // Defined in WinBase.h
+#undef Yield
+#endif
+
 	class SpirvShader
 	{
 	public:

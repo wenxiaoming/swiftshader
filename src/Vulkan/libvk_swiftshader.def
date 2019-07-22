@@ -2,7 +2,7 @@ LIBRARY vk_swiftshader
 EXPORTS
 	; Mandatory ICD entry function
 	vk_icdGetInstanceProcAddr
-
+	vk_icdNegotiateLoaderICDInterfaceVersion
 	; Optional Vulkan API entry functions
 	vkCreateInstance
 	vkDestroyInstance
@@ -209,6 +209,7 @@ EXPORTS
 	vkDestroySamplerYcbcrConversionKHR
 	; VK_KHR_surface
 	vkDestroySurfaceKHR
+	vkCreateWin32SurfaceKHR
 	vkGetPhysicalDeviceSurfaceSupportKHR
 	vkGetPhysicalDeviceSurfaceCapabilitiesKHR
 	vkGetPhysicalDeviceSurfaceFormatsKHR

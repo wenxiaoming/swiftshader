@@ -50,6 +50,8 @@
 #include "WSI/XlibSurfaceKHR.hpp"
 #endif
 
+#include "WSI/Win32SurfaceKHR.hpp"
+
 #ifdef __ANDROID__
 #include <vulkan/vk_android_native_buffer.h>
 #include "System/GrallocAndroid.hpp"
@@ -133,6 +135,7 @@ static const VkExtensionProperties instanceExtensionProperties[] =
 	{ VK_KHR_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION_NAME, VK_KHR_EXTERNAL_MEMORY_CAPABILITIES_SPEC_VERSION },
 	{ VK_KHR_EXTERNAL_SEMAPHORE_CAPABILITIES_EXTENSION_NAME, VK_KHR_EXTERNAL_SEMAPHORE_CAPABILITIES_SPEC_VERSION },
 	{ VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME, VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_SPEC_VERSION },
+	{ VK_KHR_WIN32_SURFACE_EXTENSION_NAME, VK_KHR_WIN32_SURFACE_SPEC_VERSION },
 #ifndef __ANDROID__
 	{ VK_KHR_SURFACE_EXTENSION_NAME, VK_KHR_SURFACE_SPEC_VERSION },
 #endif
@@ -2598,6 +2601,14 @@ VKAPI_ATTR void VKAPI_CALL vkGetDescriptorSetLayoutSupport(VkDevice device, cons
 	        device, pCreateInfo, pSupport);
 
 	vk::Cast(device)->getDescriptorSetLayoutSupport(pCreateInfo, pSupport);
+}
+
+VKAPI_ATTR VkResult VKAPI_CALL vkCreateWin32SurfaceKHR(VkInstance instance, const VkWin32SurfaceCreateInfoKHR* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface)
+{
+	TRACE("(VkInstance instance = %p, VkWin32SurfaceCreateInfoKHR* pCreateInfo = %p, VkAllocationCallbacks* pAllocator = %p, VkSurface* pSurface = %p)",
+		instance, pCreateInfo, pAllocator, pSurface);
+
+	return vk::Win32SurfaceKHR::Create(pAllocator, pCreateInfo, pSurface);
 }
 
 #ifdef VK_USE_PLATFORM_XLIB_KHR
